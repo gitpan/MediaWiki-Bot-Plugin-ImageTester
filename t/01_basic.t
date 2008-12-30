@@ -158,7 +158,7 @@ $res=$wikipedia->checkimage("File:Sample.jpg", "User:Test", undef, "{{Non-free r
 
 {{non-free fair use in|Little Rock Nine}}
 {{LOC-image|cph.3c19154}}", undef, "Cecil Layne");
-ok($res==2 or $res==0, "Parser test #14");
+ok((($res==2) or ($res==0)), "Parser test #14");
 isnt($res, 5, "non-free fair use in, test #15");
 
 $res=$wikipedia->checkimage("File:Sample.jpg", "User:Test", undef, "== Summary ==

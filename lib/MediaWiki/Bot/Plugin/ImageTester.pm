@@ -8,7 +8,7 @@ use URI::Escape;
 use XML::Simple;
 use Carp;
 
-our $VERSION = "0.2.0";
+our $VERSION = "0.2.1";
 
 =head1 NAME
 
@@ -71,7 +71,7 @@ sub checkimage {
 	my $imagetextnotemp=shift || $imagetext;
 	my @links=shift;
 	$imagetextnotemp=~s/\{\{.+?\}\}//sg;
-	unless ($tag) {$imagetext=~/\{(.+?)[\}\|]/; $tag=$1;}
+	unless ($tag) {$imagetext=~/\{(.+?)[\}\|]/; $tag=$1||'';}
         if ($imagetext=~/\{\{(?:Non-free|fair use|music sample)/i and $imagetextnotemp!~/(\w+\W+){25}/ and $imagetext!~/\{\{Information\W*(\w+\W+){25}/i and $imagetext!~/rationale|\{\{logo fur|\{\{Non-free use|\{\{Non-free media|\{\{Non-free image|\{\{album cover fur|\{\{Non-free fair use rationale|\{\{Historic fur|\{\{User:GeeJo\/FUR|\{\{Film cover fur|\{\{Book cover fur/i and $tag!~/C-uploaded/i) {
                 #IF this is a non-free image (indicated by a tag with a name starting with non-free, fair use, or music sample,
                 #AND the image text (excluding templates and template parameters, like {{Information}} or the rationale form) has 
