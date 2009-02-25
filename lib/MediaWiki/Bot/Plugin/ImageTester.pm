@@ -8,7 +8,7 @@ use URI::Escape;
 use XML::Simple;
 use Carp;
 
-our $VERSION = "0.2.1";
+our $VERSION = "0.2.3";
 
 =head1 NAME
 
@@ -72,7 +72,7 @@ sub checkimage {
 	my @links=shift;
 	$imagetextnotemp=~s/\{\{.+?\}\}//sg;
 	unless ($tag) {$imagetext=~/\{(.+?)[\}\|]/; $tag=$1||'';}
-        if ($imagetext=~/\{\{(?:Non-free|fair use|music sample)/i and $imagetextnotemp!~/(\w+\W+){25}/ and $imagetext!~/\{\{Information\W*(\w+\W+){25}/i and $imagetext!~/rationale|\{\{logo fur|\{\{Non-free use|\{\{Non-free media|\{\{Non-free image|\{\{album cover fur|\{\{Non-free fair use rationale|\{\{Historic fur|\{\{User:GeeJo\/FUR|\{\{Film cover fur|\{\{Book cover fur/i and $tag!~/C-uploaded/i) {
+        if ($imagetext=~/\{\{(?:Non-free|fair use|music sample)/i and $imagetextnotemp!~/(\w+\W+){25}/ and $imagetext!~/\{\{Information\W*(\w+\W+){25}/i and $imagetext!~/rationale|\{\{logo fur|\{\{Non-free use|\{\{Non-free media|\{\{Non-free image|\{\{album cover fur|\{\{Non-free fair use rationale|\{\{Historic fur|\{\{User:GeeJo\/FUR|\{\{Film cover fur|\{\{Book cover fur|\{\{[^\}]+Fair use audio|\{\{Non-free Wikimedia/i and $tag!~/C-uploaded/i) {
                 #IF this is a non-free image (indicated by a tag with a name starting with non-free, fair use, or music sample,
                 #AND the image text (excluding templates and template parameters, like {{Information}} or the rationale form) has 
                 #LESS THAN 25 words,
@@ -86,7 +86,7 @@ sub checkimage {
 #       } elsif ($tag=~/Non-free|fair use|music sample/i and $tag!~/reduce/i and ($dimx*$dimy>=350000)) {
 #               return 4; #Go to sub toobig (disabled)
         } elsif ($imagetext=~/\{Non-free|\{fair use|\{music sample/i and $imagetext!~/\[\[((?!(Image|Wikipedia|Portal|Category|WP|CAT|Talk|User)).+?:)?[^:]+\]|article\s*\=\s*[\[\'\.a-z0-9]|\{\{.*?(fur|filmr)\s?\|\s?[\[\.a-z0-9]/i and $imagetext !~/\{wikipedia-screenshot|\{non-free fair use in/i) {
-                #This is going to be the controversial one, I reckon. IF:
+		#If
                 #The image is non-free,
                 #AND the image does not contain an internal link ([[]]) to anywhere other than these namespaces:
                         #Image, Wikipedia Portal, Category, WP, CAT, Talk, User
@@ -94,8 +94,8 @@ sub checkimage {
                 #AND the image does not use a template ending in "fur" followed immediately by a parameter beginning with a dot,
                         #letter, or number
                 @links = $self->links_to_image($image) unless @links;
-                my $regex = join('|', @links);
-                unless ($imagetext=~/$regex/i) {
+                my $regex = $links[0] ? join('|', @links) : undef;
+                unless ($links[0] and $imagetext=~/$regex/i) {
                         #AND the image HAS links AND they are not referenced OR the image DOES NOT HAVE links 
 			if ($imagetext=~/album/) {
 				return 5.1;

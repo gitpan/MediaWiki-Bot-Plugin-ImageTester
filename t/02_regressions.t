@@ -7,7 +7,7 @@
 
 BEGIN{push @INC, "./lib"}
 
-use Test::More tests => 1;
+use Test::More tests => 2;
 
 #########################
 
@@ -35,5 +35,13 @@ Ang Tanging Ina N'yong Lahat Movie Poster
 ", undef, "Ang Tanging Ina N'yong Lahat");
 is($res, 0, "Regression test #1");
 
+$res=$wikipedia->checkimage("File:Sample.jpg", "User:Test", undef, "
+== Summary ==
+Album cover of [[Articlename]].
+== Licensing ==
+{{Non-free album cover}}
+{{User:Odinn/Templates/Fair use audio|Articlename}}", undef, 'Articlename');
+is($res, 0, "Regression test #2");
+
 #$res=$wikipedia->checkimage("File:Sample.jpg", "User:Test", undef, "");
-#is($res, 2, "Parser test #");
+#is($res, 2, "Regression test #");
