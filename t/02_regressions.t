@@ -43,5 +43,27 @@ Album cover of [[Articlename]].
 {{User:Odinn/Templates/Fair use audio|Articlename}}", undef, 'Articlename');
 is($res, 0, "Regression test #2");
 
+$res=$wikipedia->checkimage("File:Sample.jpg", "User:Test", undef, "{{Non-free use rationale
+ |Article           = Elmer Austin Benson
+ |Description       = *Official oil painting of Minnesota governor Elmer Benson.
+*Painter: Carl Bohnen (1871-1951) 
+*Art Collection, Oil 1939 
+*Location no. AV1999.187 
+*Negative no. 83125 
+ |Source            = [http://collections.mnhs.org/visualresources/image.cfm?imageid=64514&Page=11&Keywords=elmer%20benson&SearchType=Basic Original Image] taken from [http://www.mnhs.org/index.htm The Minnesota Historical Society]
+ |Portion           = 
+ |Low_resolution    = No.
+ |Purpose           = This is the state of Minnesota's official oil painting of governor Elmer Benson.
+ |Replaceability    = 
+ |other_information = 
+}}
+
+==Licensing==
+{{ Non-free Minnesota Historical Society image
+|imgurl=http://collections.mnhs.org/visualresources/image.cfm?imageid=64514&Page=11&Keywords=elmer%20benson&SearchType=Basic
+|locationno=AV1999.187 
+}}");
+is($res, 0, "Regression test #3");
+
 #$res=$wikipedia->checkimage("File:Sample.jpg", "User:Test", undef, "");
 #is($res, 2, "Regression test #");

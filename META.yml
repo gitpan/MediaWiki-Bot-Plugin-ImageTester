@@ -1,6 +1,6 @@
 --- #YAML:1.0
 name:               MediaWiki-Bot-Plugin-ImageTester
-version:            0.2.5
+version:            0.2.6
 abstract:           a plugin for MediaWiki::Bot which contains image copyright checking and analysis for the english wikipedia
 author:
     - Dan Collins (ST47)
