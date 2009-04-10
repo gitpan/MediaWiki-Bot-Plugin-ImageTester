@@ -8,7 +8,7 @@ use URI::Escape;
 use XML::Simple;
 use Carp;
 
-our $VERSION = "0.2.6";
+our $VERSION = "0.2.7";
 
 =head1 NAME
 

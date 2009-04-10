@@ -7,7 +7,7 @@
 
 BEGIN{push @INC, "./lib"}
 
-use Test::More tests => 2;
+use Test::More tests => 3;
 
 #########################
 
